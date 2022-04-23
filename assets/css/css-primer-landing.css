@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0
+}
+.header-section{
+    background-image: url(../img/fhgkmgsnmqy.jpeg);
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 305px
+}  
+.text-header{
+    color: rgb(197, 170, 19);
+    text-align: center;
+    font-size: 120px;
+    padding-top: 5%;
+    text-shadow: 1px 1px #000000
+} 
+.product-section{
+    padding: 2rem 0;
+}
+.tabla-productos{
+    margin: auto;
+}
+.data-product img{
+   width: 10rem;
+   padding: 0 3rem;
+   border: solid 0.5rem #250303
+}
+.data-product{
+    padding: 0px 0px 0px 5rem;
+}
+.text-sello{
+   color:#410d0d;
+    font-size: 2.5rem;
+}
+.text-valor{
+    color:#af0c0c;
+    font-size: 2rem;
+
+}
+table tr{
+    margin: 1rem 0;
+}
+footer{
+    background:rgb(197, 170, 19);
+    color: #ffffff
+}
+footer p{
+    text-align: center;
+    padding: 3rem;
+    font-size: 3rem;
+    text-shadow: 0.5px 0.5px #000000
+}
