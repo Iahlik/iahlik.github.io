@@ -1,31 +1,4 @@
-/**
- * =================================================================== 
- *
- *  ResumeTemplate v1.0 ClearCareer
- *  url: clearcareer.ca
- *  Design by: Iskender Piyale-Sheard
- *  website: izzydoesizzy.com
- *  Created 06-27-2016
- *  Last Updated: 03-19-2017
- *  ------------------------------------------------------------------
- *  Table of Contents:
-
- *  01. Global Styles
- *  02. Intro
- *  03. Social Icons
- *  04. Icon Fonts
- *  05. Section Styles
- *  06. Timeline Styles
- *  05. Footer
- EXTRAS
-
- * =================================================================== 
- */
-
-/* 01. Basic Styles
- * =================================================================== */
-
- html {
+html {
     overflow-x: hidden;
  }
  body {
@@ -37,6 +10,8 @@
  }
 
  h2 {
+     font-size: 30px;
+     font-weight: 300;
  }
 
  h5 {
@@ -51,7 +26,7 @@
 
  a:hover {
     text-decoration:none;
-    color: #622062;
+    color: #ffffff;
     opacity: 0.9;
  }
 
@@ -72,15 +47,6 @@
     opacity: 1;
  }
 
-
-
-
-
-
-
-
-/* 02. Intro
- * =================================================================== */
 
  .section-image {
  	background: #655454 url(https://wallpaperaccess.com/full/1434200.jpg) no-repeat center center;
@@ -149,41 +115,6 @@
 }
 
 
-
-/* 03. Social Icons
- * =================================================================== */
-
-.social {
-  margin: 0 10px;
-  padding-top: 1.3em;
-  text-align: center;
-  color: #fff;
-  font-size: 0.9em;
-}
-
-.social a {
-  color: white;
-  text-decoration:none;
-  padding: 2em;
-}
-
-.social a:hover{
-  opacity: 0.6;
-}
-
-.social-footer {
-    position: block;
-    padding: 15px;
-}
-
-.social-footer a {
-    color: white;
-    text-decoration: none;
-    padding: 0.6em;
-    font-size: 1.7em;
-}
-
-
 /* 04. Icon Font
  * =================================================================== */
 
@@ -196,8 +127,8 @@
  * =================================================================== */
 
 section {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .profilepic {
@@ -211,11 +142,11 @@ section {
 }
 
 .section-primary {
-    border: #1abc9c;
+    border: #622062;
 }
 
 .section-colour {
-    background-color: #1abc9c;
+    background-color: #622062;
     color: #fff;
 }
 
@@ -247,7 +178,7 @@ section {
 }
 
 #skills {
-    background: #151515 url(https://images.unsplash.com/photo-1456983933114-c22026990f4b?dpr=2&auto=format&crop=entropy&fit=crop&w=1280&h=720&q=80) no-repeat center center;
+    background: url(https://www.highreshdwallpapers.com/wp-content/uploads/2020/11/Cute-Hamster-Wallpaper-1920x1080.jpg) no-repeat center center;
     height: auto;
 }
 
@@ -259,7 +190,7 @@ footer {
     display: block;
     position: static;
     bottom: 0;
-    background-color: black;
+    background-color: #622062;
     color: #fff;
     padding: 50px 0;
 
@@ -385,7 +316,7 @@ footer p {
     }
 
     #skills {
-        background: #151515 url(https://images.unsplash.com/photo-1456983933114-c22026990f4b?dpr=2&auto=format&crop=entropy&fit=crop&w=1280&h=720&q=80) no-repeat center center;
+        background: #151515 url(https://www.highreshdwallpapers.com/wp-content/uploads/2020/11/Cute-Hamster-Wallpaper-1920x1080.jpg) no-repeat center center;
         background-position: top center;
 
     }
@@ -401,5 +332,6 @@ footer p {
     }
 
 }
-
-
+.list-group{
+    text-align: center;
+}
