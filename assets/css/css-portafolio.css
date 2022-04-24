@@ -1,0 +1,43 @@
+.{
+    margin: 0px;
+    padding: 0px;
+}
+
+.body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.navbar {
+    background-color: #622062;
+}
+
+.formulario {
+    background-color: #622062;
+}
+
+.colores {
+    color: #ffffff;
+}
+
+.parrafo-verde {
+    color: #28a745;
+    font-family: 'Roboto';
+}
+
+.card-text {
+    color: #707070;
+}
+
+.px-3 {
+    color: #707070;
+}
+
+.texto2 {
+    color: #707070;
+}
+card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
