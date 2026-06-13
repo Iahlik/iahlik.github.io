@@ -13,7 +13,7 @@
 <body>
 
   <!-- NAV -->
-  <nav class="nav">
+  <nav class="nav" id="nav">
     <span class="nav__name">Ignacio Larraín</span>
     <a href="https://bandurria.dev" target="_blank" rel="noopener" class="nav__studio">Bandurria →</a>
   </nav>
@@ -34,9 +34,9 @@
 
   <!-- PROYECTOS -->
   <section class="proyectos" id="proyectos">
-    <p class="section-label">Proyectos</p>
+    <p class="section-label reveal">Proyectos</p>
 
-    <article class="proyecto">
+    <article class="proyecto reveal">
       <div class="proyecto__meta">
         <span class="proyecto__num">01</span>
         <span class="proyecto__tag">Shopify · Diseño</span>
@@ -48,7 +48,7 @@
       </div>
     </article>
 
-    <article class="proyecto">
+    <article class="proyecto reveal">
       <div class="proyecto__meta">
         <span class="proyecto__num">02</span>
         <span class="proyecto__tag">WooCommerce · Branding</span>
@@ -60,7 +60,7 @@
       </div>
     </article>
 
-    <article class="proyecto">
+    <article class="proyecto reveal">
       <div class="proyecto__meta">
         <span class="proyecto__num">03</span>
         <span class="proyecto__tag">WordPress · Migración</span>
@@ -72,7 +72,7 @@
       </div>
     </article>
 
-    <article class="proyecto">
+    <article class="proyecto reveal">
       <div class="proyecto__meta">
         <span class="proyecto__num">04</span>
         <span class="proyecto__tag">React · TypeScript · IA</span>
@@ -83,14 +83,13 @@
         <a href="https://crm-demo-brown.vercel.app" target="_blank" rel="noopener" class="proyecto__link">Ver demo →</a>
       </div>
     </article>
-
   </section>
 
   <!-- STACK -->
   <section class="stack" id="stack">
-    <p class="section-label">Stack</p>
+    <p class="section-label reveal" style="max-width:860px;margin-left:auto;margin-right:auto;">Stack</p>
     <div class="stack__grid">
-      <div class="stack__grupo">
+      <div class="stack__grupo reveal">
         <p class="stack__titulo">CMS & E-commerce</p>
         <ul class="stack__lista">
           <li>WordPress</li>
@@ -99,7 +98,7 @@
           <li>Kadence</li>
         </ul>
       </div>
-      <div class="stack__grupo">
+      <div class="stack__grupo reveal" style="transition-delay:0.1s">
         <p class="stack__titulo">Front-end</p>
         <ul class="stack__lista">
           <li>React</li>
@@ -108,7 +107,7 @@
           <li>HTML / CSS</li>
         </ul>
       </div>
-      <div class="stack__grupo">
+      <div class="stack__grupo reveal" style="transition-delay:0.2s">
         <p class="stack__titulo">Herramientas</p>
         <ul class="stack__lista">
           <li>Git / GitHub</li>
@@ -122,21 +121,50 @@
 
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
-    <p class="section-label">Contacto</p>
-    <h2 class="contacto__headline">¿Tienes un proyecto?<br><em>Conversemos.</em></h2>
+    <p class="section-label reveal">Contacto</p>
+    <h2 class="contacto__headline reveal">¿Tienes un proyecto?<br><em>Conversemos.</em></h2>
     <div class="contacto__links">
-      <a href="mailto:hola@bandurria.dev" class="contacto__item">hola@bandurria.dev</a>
-      <a href="https://bandurria.dev" target="_blank" rel="noopener" class="contacto__item">bandurria.dev</a>
-      <a href="https://instagram.com/bandurria.dev" target="_blank" rel="noopener" class="contacto__item">@bandurria.dev</a>
-      <a href="https://github.com/iahlik" target="_blank" rel="noopener" class="contacto__item">github.com/iahlik</a>
+      <a href="mailto:hola@bandurria.dev" class="contacto__item reveal">hola@bandurria.dev</a>
+      <a href="https://bandurria.dev" target="_blank" rel="noopener" class="contacto__item reveal" style="transition-delay:0.08s">bandurria.dev</a>
+      <a href="https://instagram.com/bandurria.dev" target="_blank" rel="noopener" class="contacto__item reveal" style="transition-delay:0.16s">@bandurria.dev</a>
+      <a href="https://github.com/iahlik" target="_blank" rel="noopener" class="contacto__item reveal" style="transition-delay:0.24s">github.com/iahlik</a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer reveal">
     <span>© 2026 Ignacio Larraín</span>
     <a href="https://bandurria.dev" target="_blank" rel="noopener">Bandurria Studio</a>
   </footer>
+
+  <script>
+    // ── Scroll reveal con IntersectionObserver ──────────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Nav shadow al hacer scroll ──────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ── Cursor personalizado sutil en proyectos ─────────────
+    const proyectos = document.querySelectorAll('.proyecto');
+    proyectos.forEach(p => {
+      p.addEventListener('mouseenter', () => {
+        p.style.transition = 'opacity 0.2s';
+      });
+    });
+  </script>
 
 </body>
 </html>
