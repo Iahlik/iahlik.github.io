@@ -19,17 +19,72 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="hero">
+
+    <!-- Canvas de partículas -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Isotipo SVG gigante de fondo -->
+    <div class="hero__bg-iso" aria-hidden="true">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bandurria simplificada: cuerpo + pico largo + patas -->
+        <ellipse cx="105" cy="110" rx="38" ry="52" fill="currentColor" opacity="1"/>
+        <ellipse cx="105" cy="80" rx="18" ry="22" fill="currentColor" opacity="1"/>
+        <!-- Pico largo y curvo -->
+        <path d="M95 68 Q60 55 30 70 Q50 62 92 72" fill="currentColor" opacity="1"/>
+        <!-- Ala -->
+        <path d="M85 100 Q60 88 45 105 Q65 95 88 108Z" fill="currentColor" opacity="0.6"/>
+        <!-- Patas -->
+        <line x1="98" y1="158" x2="92" y2="185" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="112" y1="158" x2="118" y2="185" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="92" y1="185" x2="82" y2="188" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="92" y1="185" x2="94" y2="191" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="118" y1="185" x2="128" y2="188" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="118" y1="185" x2="116" y2="191" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <div class="hero__content">
       <p class="hero__eyebrow">Diseño · Desarrollo · Santiago, Chile</p>
+
       <h1 class="hero__headline">
-        Construyo sitios web<br>
-        <em>que trabajan solos.</em>
+        <span class="hero__line" data-delay="0">Construyo sitios web</span>
+        <em class="hero__line hero__line--em" data-delay="1">que trabajan solos.</em>
       </h1>
-      <p class="hero__sub">Fundador de Bandurria Studio. Trabajo con pymes que necesitan presencia digital a la altura de su producto.</p>
-      <a href="#contacto" class="btn">Conversemos</a>
+
+      <p class="hero__sub">
+        Fundador de <a href="https://bandurria.dev" target="_blank" rel="noopener">Bandurria Studio</a>.
+        Trabajo con pymes que necesitan presencia digital a la altura de su producto.
+      </p>
+
+      <div class="hero__cta">
+        <a href="#proyectos" class="btn">Ver proyectos</a>
+        <a href="#contacto" class="btn btn--ghost">Conversemos</a>
+      </div>
     </div>
-    <div class="hero__rule"></div>
+
+    <!-- Ticker horizontal -->
+    <div class="hero__ticker" aria-hidden="true">
+      <div class="hero__ticker-track">
+        <span>Diseño web</span><span class="sep">✦</span>
+        <span>WordPress</span><span class="sep">✦</span>
+        <span>WooCommerce</span><span class="sep">✦</span>
+        <span>Shopify</span><span class="sep">✦</span>
+        <span>React</span><span class="sep">✦</span>
+        <span>TypeScript</span><span class="sep">✦</span>
+        <span>Branding digital</span><span class="sep">✦</span>
+        <span>CRM a medida</span><span class="sep">✦</span>
+        <span>Diseño web</span><span class="sep">✦</span>
+        <span>WordPress</span><span class="sep">✦</span>
+        <span>WooCommerce</span><span class="sep">✦</span>
+        <span>Shopify</span><span class="sep">✦</span>
+        <span>React</span><span class="sep">✦</span>
+        <span>TypeScript</span><span class="sep">✦</span>
+        <span>Branding digital</span><span class="sep">✦</span>
+        <span>CRM a medida</span><span class="sep">✦</span>
+      </div>
+    </div>
+
   </section>
 
   <!-- PROYECTOS -->
@@ -138,32 +193,98 @@
   </footer>
 
   <script>
-    // ── Scroll reveal con IntersectionObserver ──────────────
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+  // ── Canvas: partículas flotantes ──────────────────────────
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
 
-    reveals.forEach(el => observer.observe(el));
+  const ACCENT = 'rgba(196, 98, 45,';
+  const INK    = 'rgba(26, 25, 22,';
 
-    // ── Nav shadow al hacer scroll ──────────────────────────
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
 
-    // ── Cursor personalizado sutil en proyectos ─────────────
-    const proyectos = document.querySelectorAll('.proyecto');
-    proyectos.forEach(p => {
-      p.addEventListener('mouseenter', () => {
-        p.style.transition = 'opacity 0.2s';
-      });
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x  = Math.random() * W;
+      this.y  = init ? Math.random() * H : H + 10;
+      this.r  = Math.random() * 1.8 + 0.4;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = -(Math.random() * 0.4 + 0.15);
+      this.alpha = Math.random() * 0.35 + 0.05;
+      this.color = Math.random() > 0.7 ? ACCENT : INK;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.y < -10) this.reset(false);
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.color + this.alpha + ')';
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles = Array.from({ length: 55 }, () => new Particle());
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+  resize();
+  initParticles();
+  loop();
+
+  // ── Hero: text lines stagger ──────────────────────────────
+  document.querySelectorAll('.hero__line').forEach(el => {
+    const delay = (+el.dataset.delay * 0.18 + 0.15) + 's';
+    el.style.animationDelay = delay;
+  });
+
+  // ── Isotipo parallax suave ────────────────────────────────
+  const iso = document.querySelector('.hero__bg-iso');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (iso) iso.style.transform = `translate(-50%, calc(-50% + ${y * 0.18}px))`;
+  }, { passive: true });
+
+  // ── Scroll reveal ─────────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
     });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // ── Nav scroll shadow ─────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // ── Magnetic btn ─────────────────────────────────────────
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.22}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
   </script>
 
 </body>
